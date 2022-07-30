@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+@media (max-width: 768px){
+    html {
+        font-size: 87.5%; /* Ou seja, 14 px 
+                            fica: 16px - 100%
+                                  14px - x    -> Resultado: 87.5% */
+    }
+}

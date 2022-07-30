@@ -1,0 +1,30 @@
+.task {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1rem;
+
+    background: var(--gray-500);
+
+    padding: 1rem 2rem;
+    margin-top: .5rem;
+
+    border-radius: 12px;
+    border: 1px solid var(--gray-400);
+}
+
+.task+.task {
+    /* Estilizar toda task que tenha um post depois dela */
+    margin-top: 1rem;
+}
+
+.task .taskText {
+    font-size: 0.875rem;
+    color: var(--gray-100);
+}
+
+/* form .taskDone {
+    width: 100%;
+    cursor: pointer;
+} */

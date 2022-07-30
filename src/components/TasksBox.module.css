@@ -1,0 +1,97 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    width: 100%;
+
+    margin-top: 4rem;
+}
+
+.textInfos {
+    min-width: 46%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+
+    font-size: 0.875rem;
+
+    gap: 1rem;
+}
+
+.createdTasks span, .completeTasks span {
+    color: var(--gray-200);
+    font-weight: 400;
+    font-size: 0.75rem;
+
+    background: var(--gray-400);
+    border-radius: 10px;
+    padding: .1rem .6rem;
+    margin-left: .5rem;
+}
+
+.textInfos p.createdTasks  {
+    color: var(--blue);
+    font-weight: bold;
+}
+
+.textInfos p.completeTasks {
+    color: var(--purple);
+    font-weight: bold;
+}
+
+.tasksWrapper {
+    min-width: 46%;
+    max-width: 46%;
+    max-height: 15.25rem; /* peguei essa altura do figma*/
+
+    margin-top: 1rem;
+    border-top: 2px solid var(--gray-500);
+    border-radius: 12px;
+
+    
+}
+
+.tasksWrapper .noTasks {
+    color: var(--gray-300);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    visibility: hidden;
+    max-height: 0;
+}
+
+.noTasks .textNoTasks {
+    font-size: 1rem;
+    margin-top: 1rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+
+.textNoTasks span {
+    font-weight: bold;
+}
+
+.tasks {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+
+@media (max-width: 768px){ 
+    .textInfos {
+        min-width: 70%;
+    }
+    
+    .tasksWrapper {
+        min-width: 70%;
+    }
+}
