@@ -46,7 +46,7 @@
 .tasksWrapper {
     min-width: 46%;
     max-width: 46%;
-    max-height: 15.25rem; /* peguei essa altura do figma*/
+    min-height: 15.25rem; /* peguei essa altura do figma*/
 
     margin-top: 1rem;
     border-top: 2px solid var(--gray-500);
@@ -62,9 +62,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-height: 15.25rem;
+    
 
-    visibility: hidden;
-    max-height: 0;
+    /* visibility: hidden;
+    max-height: 0; */
 }
 
 .noTasks .textNoTasks {
@@ -92,6 +94,6 @@
     }
     
     .tasksWrapper {
-        min-width: 70%;
+        min-width: 80%;
     }
 }
