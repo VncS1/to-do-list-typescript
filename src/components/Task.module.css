@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
 
     gap: 2rem;
 
@@ -25,6 +26,7 @@
 .task .taskText {
     font-size: 0.875rem;
     color: var(--gray-100);
+    margin-left: 3rem;
 }
 
 /* The container */
@@ -53,8 +55,8 @@
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    height: 22px;
-    width: 22px;
+    height: 17px;
+    width: 17px;
     background-color: transparent;
     border: 2px solid var(--blue);
     border-radius: 12px;
@@ -86,10 +88,10 @@
   
   /* Style the checkmark/indicator */
   .container .checkmark:after {
-    left: 6px;
-    top: 3.5px;
+    left: 3.44px;
+    top: 2.5px;
     width: 5px;
-    height: 7px;
+    height: 5px;
     border: solid white;
     border-width: 0 1px 1px 0;
     -webkit-transform: rotate(45deg);

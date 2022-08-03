@@ -1,46 +1,106 @@
 import styles from './TasksBox.module.css'
 
-import { ClipboardText } from 'phosphor-react'
+import { ClipboardText, PlusCircle } from 'phosphor-react'
 import { Task } from './Task';
+import { useId, useState } from 'react';
+import { FormEvent, ChangeEvent, InvalidEvent } from 'react'
 
-const tasks = [
-    {
-        id: 1,
-        title: 'First task',
-    }
-]
+// const tasks = [
+//     {
+//         id: 1,
+//         content: 'First task',
+//     },
+//     {
+//         id: 2,
+//         content: 'Second task',
+//     }
+// ]
+
+interface Task {
+    id:number;
+    content: string;
+}
 
 export function TasksBox() {
+
+    const [tasks, setTasks] = useState<Task[]>([])
+
+    const [newTaskText, setNewTaskText] = useState('')
+
+
+    function handleCreateNewTask(event: FormEvent) {
+        event.preventDefault()
+
+        setTasks([...tasks, {
+            id: tasks.length + 1,
+            content: newTaskText
+        }]);
+
+        setNewTaskText('');
+    }
+
+    function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+
+        event.target.setCustomValidity('')
+
+        setNewTaskText(event.target.value)
+    }
+
+    function handleNewCommentInvalid(event: InvalidEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('Esse campo é obrigatório!')
+    }
+
+
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.textInfos}>
-                <p className={styles.createdTasks}>Tarefas criadas <span>0</span></p>
-                <p className={styles.completeTasks}>Concluídas <span>0</span></p>
-            </div>
+        <div>
+            <form className={styles.formBox} onSubmit={handleCreateNewTask}>
+                <input 
+                    type="text" 
+                    placeholder="Adicione uma nova tarefa" 
+                    className={styles.taskInput} 
+                    value={newTaskText} //Pro valor voltar a ser vazio e o comentário não bugar
+                    onChange={handleNewTaskChange} //Mudar o valor do newTaskText sempre que tiver mudanças no input
+                    onInvalid={handleNewCommentInvalid}
+                    required
+                />
+                <button type="submit" className={styles.createButton}>
+                    Criar <PlusCircle size={18} />
+                </button>
+            </form>
+            <div className={styles.wrapper}>
+                <div className={styles.textInfos}>
+                    <p className={styles.createdTasks}>Tarefas criadas <span>0</span></p>
+                    <p className={styles.completeTasks}>Concluídas <span>0</span></p>
+                </div>
 
-            <div className={styles.tasksWrapper}>
+                <div className={styles.tasksWrapper}>
 
 
-                <div className={styles.tasks}>
-                    {/* fazer um if ternário
+                    <div className={styles.tasks}>
+                        {/* fazer um if ternário
                     se tiver tasks, faço o map, se não, exibo o
                     noTasks*/}
 
-                    {!!tasks.length ? /* Transforma em booleano e ve o tamanho do array, Se tiver uma task, exibir ela, se não, exibir o texto*/
-                        <div>
-                            <Task />
-                            <Task />
-                        </div>
-                        :
-                        <div className={styles.noTasks}>
-                            <ClipboardText size={56} />
-                            <p className={styles.textNoTasks}>
-                                <span>Você ainda não tem tarefas cadastradas</span><br />
-                                Crie tarefas e organize seus itens a fazer
-                            </p>
-                        </div>
-                    }
+                        {!!tasks.length ? /* Transforma em booleano e ve o tamanho do array, Se tiver uma task, exibir ela, se não, exibir o texto*/
+                            tasks.map(task => {
+                                return (
+                                    <Task
+                                        key={task.id}
+                                        content={task.content}
+                                    />
+                                );
+                            })
+                            :
+                            <div className={styles.noTasks}>
+                                <ClipboardText size={56} />
+                                <p className={styles.textNoTasks}>
+                                    <span>Você ainda não tem tarefas cadastradas</span><br />
+                                    Crie tarefas e organize seus itens a fazer
+                                </p>
+                            </div>
+                        }
 
+                    </div>
                 </div>
             </div>
         </div>

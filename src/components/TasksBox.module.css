@@ -1,3 +1,46 @@
+.formBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: .5rem;
+
+    width: 100%;
+    margin-top: -1.5rem;
+}
+
+.formBox .taskInput {
+    min-width: 40%;
+    padding: 1rem .75rem;
+
+    background: var(--gray-500);
+    border: 0;
+    border-radius: 4px;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    outline: none;
+    color: var(--gray-200);
+}
+
+.formBox .createButton {
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+    padding: 1rem .5rem;
+
+    font-weight: bold;
+    color: var(--gray-100);
+    background: var(--blue-dark);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    min-width: 5%;
+}
+
+
 .wrapper {
     display: flex;
     align-items: center;
@@ -15,14 +58,15 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;   
+    justify-content: space-between;
 
     font-size: 0.875rem;
 
     gap: 1rem;
 }
 
-.createdTasks span, .completeTasks span {
+.createdTasks span,
+.completeTasks span {
     color: var(--gray-200);
     font-weight: 400;
     font-size: 0.75rem;
@@ -33,7 +77,7 @@
     margin-left: .5rem;
 }
 
-.textInfos p.createdTasks  {
+.textInfos p.createdTasks {
     color: var(--blue);
     font-weight: bold;
 }
@@ -46,13 +90,14 @@
 .tasksWrapper {
     min-width: 46%;
     max-width: 46%;
-    min-height: 15.25rem; /* peguei essa altura do figma*/
+    min-height: 15.25rem;
+    /* peguei essa altura do figma*/
 
     margin-top: 1rem;
     border-top: 2px solid var(--gray-500);
     border-radius: 12px;
 
-    
+
 }
 
 .tasksWrapper .noTasks {
@@ -63,7 +108,7 @@
     justify-content: center;
     flex-direction: column;
     min-height: 15.25rem;
-    
+
 
     /* visibility: hidden;
     max-height: 0; */
@@ -88,12 +133,21 @@
 }
 
 
-@media (max-width: 768px){ 
+@media (max-width: 768px) {
+    .formBox .taskInput {
+        min-width: 55%;
+    }
+
+    .formBox .createButton {
+        min-width: 15%;
+    }
+
     .textInfos {
         min-width: 70%;
     }
-    
+
     .tasksWrapper {
         min-width: 80%;
     }
+
 }
