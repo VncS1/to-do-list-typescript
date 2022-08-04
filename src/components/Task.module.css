@@ -1,100 +1,106 @@
 .task {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 
-    gap: 2rem;
+  gap: 2rem;
 
-    background: var(--gray-500);
+  background: var(--gray-500);
 
-    padding: 1.25rem 0;
+  padding: 1.25rem 0;
 
-    border-radius: 12px;
-    border: 1px solid var(--gray-400);
+  border-radius: 12px;
+  border: 1px solid var(--gray-400);
 }
 
 .task+.task {
-    /* Estilizar toda task que tenha um post depois dela */
-    margin-top: 1rem;
+  /* Estilizar toda task que tenha um post depois dela */
+  margin-top: 1rem;
 }
 
 .task .trashIcon {
-    margin-right: 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
 }
 
 .task .taskText {
-    font-size: 0.875rem;
-    color: var(--gray-100);
-    margin-left: 3rem;
+  font-size: 0.875rem;
+  color: var(--gray-100);
+  margin-left: 3rem;
+}
+
+.taskText .taskFinished {
+  text-decoration: line-through;
+  color: var(--gray-300);
 }
 
 /* The container */
 .container {
-    display: block;
-    position: relative;
-    padding-left: 1rem;
-    
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    position: absolute;
-    height: 17px;
-    width: 17px;
-    background-color: transparent;
-    border: 2px solid var(--blue);
-    border-radius: 12px;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  /* .container:hover input ~ .checkmark {
+  display: block;
+  position: relative;
+  padding-left: 1rem;
+
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  height: 17px;
+  width: 17px;
+  background-color: transparent;
+  border: 2px solid var(--blue);
+  border-radius: 12px;
+}
+
+/* On mouse-over, add a grey background color */
+/* .container:hover input ~ .checkmark {
     background-color: #ccc;
   }
    */
 
-  /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
-    background-color: var(--purple-dark);
-    border: 2px solid var(--purple-dark);
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
-    left: 3.44px;
-    top: 2.5px;
-    width: 5px;
-    height: 5px;
-    border: solid white;
-    border-width: 0 1px 1px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+  background-color: var(--purple-dark);
+  border: 2px solid var(--purple-dark);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 3.44px;
+  top: 2.5px;
+  width: 5px;
+  height: 5px;
+  border: solid white;
+  border-width: 0 1px 1px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

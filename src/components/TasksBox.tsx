@@ -5,20 +5,10 @@ import { Task } from './Task';
 import { useId, useState } from 'react';
 import { FormEvent, ChangeEvent, InvalidEvent } from 'react'
 
-// const tasks = [
-//     {
-//         id: 1,
-//         content: 'First task',
-//     },
-//     {
-//         id: 2,
-//         content: 'Second task',
-//     }
-// ]
-
 interface Task {
     id:number;
     content: string;
+    isFinished: boolean;
 }
 
 export function TasksBox() {
@@ -28,12 +18,17 @@ export function TasksBox() {
     const [newTaskText, setNewTaskText] = useState('')
 
 
+    //USAR AQ
+    const [newCheckTask, setNewCheckTask] = useState(false)
+
+
     function handleCreateNewTask(event: FormEvent) {
         event.preventDefault()
 
         setTasks([...tasks, {
             id: tasks.length + 1,
-            content: newTaskText
+            content: newTaskText,
+            isFinished: false,
         }]);
 
         setNewTaskText('');
@@ -46,10 +41,31 @@ export function TasksBox() {
         setNewTaskText(event.target.value)
     }
 
+
     function handleNewCommentInvalid(event: InvalidEvent<HTMLInputElement>) {
         event.target.setCustomValidity('Esse campo é obrigatório!')
     }
 
+    function deleteTask(idToDelete: number){
+
+        const tasksWithoutDeleted = tasks.filter(task => {
+            return task.id !== idToDelete
+        })
+
+        setTasks(tasksWithoutDeleted)
+    }
+
+    function handleTaskChecked(idToCheck: number){
+        tasks.forEach(task =>{
+            if(task.id===idToCheck){
+                setTasks([...tasks, {
+                    id: idToCheck,
+                    content: task.content,
+                    isFinished: true
+                }])
+            }
+        })
+    }
 
     return (
         <div>
@@ -69,7 +85,7 @@ export function TasksBox() {
             </form>
             <div className={styles.wrapper}>
                 <div className={styles.textInfos}>
-                    <p className={styles.createdTasks}>Tarefas criadas <span>0</span></p>
+                    <p className={styles.createdTasks}>Tarefas criadas <span>{tasks.length}</span></p>
                     <p className={styles.completeTasks}>Concluídas <span>0</span></p>
                 </div>
 
@@ -87,6 +103,10 @@ export function TasksBox() {
                                     <Task
                                         key={task.id}
                                         content={task.content}
+                                        taskId={task.id}
+                                        isFinished={task.isFinished}
+                                        onDeleteTask={deleteTask}
+                                        onCheckTask={handleTaskChecked}
                                     />
                                 );
                             })
