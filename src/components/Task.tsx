@@ -1,12 +1,17 @@
 import styles from './Task.module.css'
 import { Trash } from 'phosphor-react'
 
+interface CheckedInfos {
+    content: string;
+    taskToCheck: number;
+}
+
 interface TaskProps {
     content: string;
     taskId: number;
     isFinished: boolean;
     onDeleteTask: (task: number) => void; //Pegando a função de deletar
-    onCheckTask: (task: number) => void;
+    onCheckTask: (idToCheck: number, taskCheckedText: string, actualStatus: boolean) => void;
 }
 
 export function Task({ content, taskId, onDeleteTask, isFinished, onCheckTask }: TaskProps) {
@@ -18,8 +23,7 @@ export function Task({ content, taskId, onDeleteTask, isFinished, onCheckTask }:
     }
 
     function handleCheckTask(){
-        onCheckTask(taskId);
-
+        onCheckTask(taskId, content, isFinished);
     }
     
     

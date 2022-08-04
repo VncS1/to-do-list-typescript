@@ -6,7 +6,7 @@ import { useId, useState } from 'react';
 import { FormEvent, ChangeEvent, InvalidEvent } from 'react'
 
 interface Task {
-    id:number;
+    id: number;
     content: string;
     isFinished: boolean;
 }
@@ -34,6 +34,9 @@ export function TasksBox() {
         setNewTaskText('');
     }
 
+
+
+
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
 
         event.target.setCustomValidity('')
@@ -46,7 +49,7 @@ export function TasksBox() {
         event.target.setCustomValidity('Esse campo é obrigatório!')
     }
 
-    function deleteTask(idToDelete: number){
+    function deleteTask(idToDelete: number) {
 
         const tasksWithoutDeleted = tasks.filter(task => {
             return task.id !== idToDelete
@@ -55,25 +58,29 @@ export function TasksBox() {
         setTasks(tasksWithoutDeleted)
     }
 
-    function handleTaskChecked(idToCheck: number){
-        tasks.forEach(task =>{
-            if(task.id===idToCheck){
-                setTasks([...tasks, {
-                    id: idToCheck,
-                    content: task.content,
-                    isFinished: true
-                }])
-            }
+    function handleTaskChecked(idToCheck: number, taskCheckedContent: string, actualStatus: boolean) {
+
+        const tasksWithoutChecked = tasks.filter(task => {
+            return task.id !== idToCheck
         })
+
+        setTasks(tasksWithoutChecked);
+
+
+        setTasks([...tasks, {
+            id: idToCheck,
+            content: taskCheckedContent,
+            isFinished: !actualStatus,
+        }])
     }
 
     return (
         <div>
             <form className={styles.formBox} onSubmit={handleCreateNewTask}>
-                <input 
-                    type="text" 
-                    placeholder="Adicione uma nova tarefa" 
-                    className={styles.taskInput} 
+                <input
+                    type="text"
+                    placeholder="Adicione uma nova tarefa"
+                    className={styles.taskInput}
                     value={newTaskText} //Pro valor voltar a ser vazio e o comentário não bugar
                     onChange={handleNewTaskChange} //Mudar o valor do newTaskText sempre que tiver mudanças no input
                     onInvalid={handleNewCommentInvalid}
