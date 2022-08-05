@@ -45,8 +45,16 @@ export function TasksBox() {
     function deleteTask(idToDelete: number) {
 
         const tasksWithoutDeleted = tasks.filter(task => {
+            if(task.id === idToDelete && task.isFinished){
+                setFinishedTasks((state) => { //pra atualizar o valor de tasks concluídas, eu preciso do valor anterior, que no caso é o state
+                    return state - 1
+                })
+            }
+
             return task.id !== idToDelete
         })
+
+
 
         setTasks(tasksWithoutDeleted)
     }
@@ -64,7 +72,7 @@ export function TasksBox() {
                 isFinished: !actualStatus,
             }, ...tasksWithoutChecked])
 
-            setFinishedTasks((state) => { //pra atualizar o valor de likes, eu preciso do valor anterior, que no caso é o state
+            setFinishedTasks((state) => { //pra atualizar o valor de tasks concluídas, eu preciso do valor anterior, que no caso é o state
                 return state - 1
             })
         }else {
@@ -74,7 +82,7 @@ export function TasksBox() {
                 isFinished: !actualStatus,
             }])
 
-            setFinishedTasks((state) => { //pra atualizar o valor de likes, eu preciso do valor anterior, que no caso é o state
+            setFinishedTasks((state) => { //pra atualizar o valor de tasks concluídas, eu preciso do valor anterior, que no caso é o state
                 return state + 1
             })
         }
