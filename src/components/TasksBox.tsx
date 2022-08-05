@@ -55,11 +55,19 @@ export function TasksBox() {
             return task.id !== idToCheck
         })
 
-        setTasks([...tasksWithoutChecked], {
-            id: idToCheck,
-            content: taskCheckedContent,
-            isFinished: !actualStatus,
-        })
+        if(actualStatus){
+            setTasks([{
+                id: idToCheck,
+                content: taskCheckedContent,
+                isFinished: !actualStatus,
+            }, ...tasksWithoutChecked])
+        }else {
+            setTasks([...tasksWithoutChecked, {
+                id: idToCheck,
+                content: taskCheckedContent,
+                isFinished: !actualStatus,
+            }])
+        }
     }
 
     return (
