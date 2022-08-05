@@ -15,8 +15,6 @@ interface TaskProps {
 }
 
 export function Task({ content, taskId, onDeleteTask, isFinished, onCheckTask }: TaskProps) {
-    
-    
 
     function handleDeleteTask(){
         onDeleteTask(taskId);

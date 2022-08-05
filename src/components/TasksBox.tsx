@@ -2,7 +2,7 @@ import styles from './TasksBox.module.css'
 
 import { ClipboardText, PlusCircle } from 'phosphor-react'
 import { Task } from './Task';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { FormEvent, ChangeEvent, InvalidEvent } from 'react'
 
 interface Task {
@@ -17,11 +17,6 @@ export function TasksBox() {
 
     const [newTaskText, setNewTaskText] = useState('')
 
-
-    //USAR AQ
-    const [newCheckTask, setNewCheckTask] = useState(false)
-
-
     function handleCreateNewTask(event: FormEvent) {
         event.preventDefault()
 
@@ -34,16 +29,12 @@ export function TasksBox() {
         setNewTaskText('');
     }
 
-
-
-
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
 
         event.target.setCustomValidity('')
 
         setNewTaskText(event.target.value)
     }
-
 
     function handleNewCommentInvalid(event: InvalidEvent<HTMLInputElement>) {
         event.target.setCustomValidity('Esse campo é obrigatório!')
@@ -64,14 +55,11 @@ export function TasksBox() {
             return task.id !== idToCheck
         })
 
-        setTasks(tasksWithoutChecked);
-
-
-        setTasks([...tasks, {
+        setTasks([...tasksWithoutChecked], {
             id: idToCheck,
             content: taskCheckedContent,
             isFinished: !actualStatus,
-        }])
+        })
     }
 
     return (
@@ -100,10 +88,6 @@ export function TasksBox() {
 
 
                     <div className={styles.tasks}>
-                        {/* fazer um if ternário
-                    se tiver tasks, faço o map, se não, exibo o
-                    noTasks*/}
-
                         {!!tasks.length ? /* Transforma em booleano e ve o tamanho do array, Se tiver uma task, exibir ela, se não, exibir o texto*/
                             tasks.map(task => {
                                 return (
@@ -126,7 +110,6 @@ export function TasksBox() {
                                 </p>
                             </div>
                         }
-
                     </div>
                 </div>
             </div>
