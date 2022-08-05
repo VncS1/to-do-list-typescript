@@ -15,16 +15,18 @@ export function TasksBox() {
 
     const [tasks, setTasks] = useState<Task[]>([])
 
+    const [finishedTasks, setFinishedTasks] = useState(0);
+
     const [newTaskText, setNewTaskText] = useState('')
 
     function handleCreateNewTask(event: FormEvent) {
         event.preventDefault()
 
-        setTasks([...tasks, {
+        setTasks([{
             id: tasks.length + 1,
             content: newTaskText,
             isFinished: false,
-        }]);
+        }, ...tasks]); //Adicionando as tasks criadas sempre no começo
 
         setNewTaskText('');
     }
@@ -61,12 +63,20 @@ export function TasksBox() {
                 content: taskCheckedContent,
                 isFinished: !actualStatus,
             }, ...tasksWithoutChecked])
+
+            setFinishedTasks((state) => { //pra atualizar o valor de likes, eu preciso do valor anterior, que no caso é o state
+                return state - 1
+            })
         }else {
             setTasks([...tasksWithoutChecked, {
                 id: idToCheck,
                 content: taskCheckedContent,
                 isFinished: !actualStatus,
             }])
+
+            setFinishedTasks((state) => { //pra atualizar o valor de likes, eu preciso do valor anterior, que no caso é o state
+                return state + 1
+            })
         }
     }
 
@@ -89,7 +99,7 @@ export function TasksBox() {
             <div className={styles.wrapper}>
                 <div className={styles.textInfos}>
                     <p className={styles.createdTasks}>Tarefas criadas <span>{tasks.length}</span></p>
-                    <p className={styles.completeTasks}>Concluídas <span>0</span></p>
+                    <p className={styles.completeTasks}>Concluídas <span> {finishedTasks} {tasks.length ? <text>de {tasks.length}</text> : <text></text>}</span></p>
                 </div>
 
                 <div className={styles.tasksWrapper}>
